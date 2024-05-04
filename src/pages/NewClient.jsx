@@ -1,26 +1,19 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 export default function NewClient () {
-  const [data, setData] = useState({ name: '', email: '', password: '', tel: '' })
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors }
+  } = useForm()
 
   const navigate = useNavigate()
-  const handleChange = ({ target }) => {
-    const { name, value } = target
-    setData({ ...data, [name]: value })
-  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(data)
-    axios.post('http://localhost:1234/clients', data)
-      .then(res => {
-        console.log(res.data)
-        navigate('/login')
-      })
-      .catch(err => console.log(err))
-  }
+  const onSubmit = (data) => console.log(data)
 
   return (
     <>
@@ -28,36 +21,34 @@ export default function NewClient () {
         <NavLink to='/login' className='border-2 border-black p-2 rounded-md '>Ingresar</NavLink>
       </header>
       <main className='h-lvh flex justify-center '>
-        <form onSubmit={handleSubmit} className=' shadow-lg flex flex-col gap-8 mt-20  h-fit w-fit p-20' action=''>
+        <form onSubmit={handleSubmit(onSubmit)} className=' shadow-lg flex flex-col gap-8 mt-20  h-fit w-fit p-20'>
           <h1 className=' text-3xl font-bold text-[#00BF63]'>Crear nueva cuenta</h1>
           <label>
             <span className='block'>Nombre completo</span>
             <input
-              className='border-b-2 border-black p-2 w-full focus:outline-none' type='text' name='name' id=''
-              value={data.name} onChange={handleChange} required
+              {...register('example')}
+              className='border-b-2 border-black p-2 w-full focus:outline-none' type='text'
             />
           </label>
 
           <label>
             <span className='block'>Email</span>
             <input
+              {...register('exampleRequired', { required: true })}
               className='border-b-2 border-black p-2 w-full focus:outline-none' type='text' name='email' id='' placeholder='email@gmail.com'
-              value={data.email} onChange={handleChange} required
-            />
+            /> {errors.exampleRequired && <span className=' text-red-600 italic'>Th</span>}
           </label>
           <label>
             <span className='block'>Contrasena</span>
             <input
-              className='border-b-2 border-black p-2 w-full focus:outline-none' type='password' name='password' id='' placeholder=''
-              value={data.password} onChange={handleChange} required
-            />
+              className='border-b-2 border-black p-2 w-full focus:outline-none' type='password' name='password'
+            /><span className=' text-red-600 italic' />
           </label>
           <label>
             <span className='block'>Telefono</span>
             <input
-              className='border-b-2 border-black p-2 w-full focus:outline-none' type='tel' name='tel' id='' placeholder=''
-              value={data.tel} onChange={handleChange} required
-            />
+              className='border-b-2 border-black p-2 w-full focus:outline-none' type='tel' name='tel'
+            /><span className=' text-red-600 italic' />
           </label>
 
           <button type='submit' className=' bg-[#00BF63] rounded-md'>Crear</button>
