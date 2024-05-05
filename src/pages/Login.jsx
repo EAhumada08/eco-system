@@ -1,12 +1,29 @@
 import { useState } from 'react'
-import axios from 'axios'
+import { useForm } from 'react-hook-form'
 import { useNavigate, NavLink } from 'react-router-dom'
+import { TextField } from '../components/TextField'
+import { validateAccount } from '../services/clients'
 
 export default function Login () {
+  const {
+    register,
+    handleSubmit
+  } = useForm()
+
   const navigate = useNavigate()
-  const [data, setData] = useState({ username: '', password: '' })
   const [user, setUser] = useState('clients')
   const [error, setError] = useState(false)
+
+  const onSubmit = async (data) => {
+    console.log(data)
+    try {
+      const res = await validateAccount(data)
+      navigate('/dashboard')
+    } catch (error) {
+      setError(true)
+      console.log(error)
+    }
+  }
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -15,38 +32,19 @@ export default function Login () {
     console.log(name)
   }
 
-  const handleChange = ({ target }) => {
-    const { name, value } = target
-    setData({ ...data, [name]: value })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    axios.get(`http://localhost:1234/${user}/?user=${data.username}&&pass=${data.password}`)
-      .then(res => {
-        const clients = res.data
-        console.log(clients)
-        navigate('/Dashboard')
-      })
-      .catch(({ res }) => {
-        console.log(res)
-        setError(true)
-      })
-  }
   return (
 
     <>
 
       <div className=' h-svh w-dvw justify-center items-center flex'>
-        <div className='flex  p-3 smartphone:flex-col lg:flex-row md:flex-row gap-x-1 shadow-lg'>
+        <div className='flex   smartphone:flex-col lg:flex-row md:flex-row gap-x-1 shadow-lg'>
           <div className='  w-[600px] bg-[#00BF63] rounded-lg items-center justify-center flex'>
             <img className='scale-100' src='../public/imgs/EcoSystem.png' alt='ssd' />
           </div>
+          <div className=' p-4 flex flex-col  items-center'>
+            <h1 className=' text-center font-bold text-2xl mb-3'>Bienvenido(a)</h1>
 
-          <form className='  px-8 py-4 h-fit w-fit flex flex-col gap-y-6 items-center'>
-            <h1 className=' text-center font-bold text-2xl'>Bienvenido(a)</h1>
-
-            <div className=' gap-x-3 flex flex-row'>
+            <div className=' gap-x-3 flex flex-row justify-center items-center'>
               <button
                 className='bg-[#00BF63] text-white hover:bg-[#9a9999]  rounded-tr-[20px] rounded-bl-[20px] font-bold p-2'
                 name='clients' onClick={handleClick}
@@ -65,37 +63,40 @@ export default function Login () {
               >Administrador
               </button>
             </div>
-            <>
-              <label className='w-full'> <span>Correo</span>
-                <input
-                  className={error
-                    ? ' border-2 border-red-600 p-1 w-full'
-                    : ' border-2 border-black p-1 w-full'}
-                  type='text' name='username' id='i-u_n'
-                  value={data.username} onChange={handleChange}
+
+            <form
+              className='  px-4 py-4 h-fit w-fit flex flex-col gap-y-6 items-center'
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <div className=' w-72 flex flex-col gap-y-5'>
+                <TextField
+                  label='Correo'
+                  name='user'
+                  type='email'
+                  register={register}
+                  error={error}
                 />
-              </label>
-              <label className='w-full'> <span>Contraseña</span>
-                <input
-                  className={error
-                    ? 'border-2 border-red-600 p-1 w-full'
-                    : 'border-2 border-black p-1 w-full'}
-                  type='password' name='password' id='i-p'
-                  value={data.password} onChange={handleChange}
+
+                <TextField
+                  label='Contraseña'
+                  name='pass'
+                  register={register}
+                  error={error}
                 />
-              </label>
+              </div>
+
               <h1 className={error ? 'visible text-red-600' : 'invisible'}>Datos incorrecctos</h1>
-            </>
 
-            <button
-              className=' transition ease-in-out h-8 w-20 border rounded-md border-black font-bold bg-[#00BF63] hover:bg-green-400'
-              type='submit' onClick={handleSubmit}
-            >Entrar
-            </button>
+              <button
+                className='  h-8 w-20 border rounded-md border-black font-bold bg-[#00BF63] hover:bg-green-400'
+                type='submit' onClick={handleSubmit}
+              >Entrar
+              </button>
 
-            <NavLink to='/nuevoCliente' className='hover:text-green-600 font-bold'>No tienes cuenta? Registrate</NavLink>
+              <NavLink to='/nuevoCliente' className='hover:text-green-600 font-bold'>No tienes cuenta? Registrate</NavLink>
 
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </>

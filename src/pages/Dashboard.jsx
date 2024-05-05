@@ -1,5 +1,10 @@
 export default function Dashboard () {
   return (
-    <h1>Hola</h1>
+    <div>
+      <header>Ecosystem</header>
+      <main>
+        Nuevo
+      </main>
+    </div>
   )
 }

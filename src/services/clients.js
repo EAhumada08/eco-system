@@ -7,3 +7,8 @@ export const registerClient = async (client) => {
   const { data } = await axios.post(`${local}clients`, client)
   return data
 }
+
+export const validateAccount = async (client) => {
+  const { data } = await axios.post(`${local}clients/login`, client)
+  return data 
+}
