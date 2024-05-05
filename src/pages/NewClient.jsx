@@ -1,58 +1,83 @@
-import axios from 'axios'
-import { useState } from 'react'
+import TextField from '../components/TextField'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { clientSchema } from '../validations/client'
+import { registerClient } from '../services/clients'
+import { useState } from 'react'
 
 export default function NewClient () {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors }
-  } = useForm()
+  } = useForm({ resolver: zodResolver(clientSchema) })
 
-  const navigate = useNavigate()
+  const [userRegistered, setUserRegistered] = useState(false)
+  const [error, setError] = useState(false)
+  // const navigate = useNavigate()
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = async (data) => {
+    try {
+      const res = await registerClient(data)
+      console.log(res)
+      setUserRegistered(true)
+    } catch (error) {
+      console.log(error)
+      setError(true)
+    }
+  }
 
   return (
     <>
-      <header className=' p-5 bg-green-500  flex'>
-        <NavLink to='/login' className='border-2 border-black p-2 rounded-md '>Ingresar</NavLink>
-      </header>
       <main className='h-lvh flex justify-center '>
-        <form onSubmit={handleSubmit(onSubmit)} className=' shadow-lg flex flex-col gap-8 mt-20  h-fit w-fit p-20'>
-          <h1 className=' text-3xl font-bold text-[#00BF63]'>Crear nueva cuenta</h1>
-          <label>
-            <span className='block'>Nombre completo</span>
-            <input
-              {...register('example')}
-              className='border-b-2 border-black p-2 w-full focus:outline-none' type='text'
+        <div className=' static shadow-lg   h-fit w-fit mt-10 p-10'>
+          {userRegistered && <h1>hola</h1>}
+          <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col  gap-8'>
+            <h1 className=' text-3xl text-center font-bold text-[#00BF63]'>Crear nueva cuenta</h1>
+
+            <TextField
+              label='Nombre completo'
+              name='name'
+              type='text'
+              register={register}
             />
-          </label>
+            {errors.name && <span className='visible text-red-600 italic '>{errors.name?.message}</span>}
+            <TextField
+              label='Correo'
+              name='email'
+              type='email'
+              register={register}
+            />
+            {error && <p className=' text-red-600'>Error</p>}
+            {/* errors.email ? <span className='visible text-red-600 italic w-full'>{errors.email?.message}</span> : <span className='invisible text-red-600 italic w-full' /> */}
+            <TextField
+              label='Contraseña'
+              name='password'
+              type='password'
+              register={register}
+            />
+            {errors.password ? <span className='visible text-red-600 italic'>{errors.password?.message}</span> : <span />}
+            <TextField
+              label='Telefono'
+              name='tel'
+              type='tel'
+              pattern='[0-9]{10}'
+              register={register}
+            />
+            {errors.tel ? <span className=' text-red-600 italic'>{errors.tel?.message}</span> : <span />}
+            <button
+              type='submit'
+              className=' bg-[#00BF63] rounded-md'
+            >Crear
+            </button>
+            <NavLink
+              to='/login'
+            >Ingresar
+            </NavLink>
+          </form>
 
-          <label>
-            <span className='block'>Email</span>
-            <input
-              {...register('exampleRequired', { required: true })}
-              className='border-b-2 border-black p-2 w-full focus:outline-none' type='text' name='email' id='' placeholder='email@gmail.com'
-            /> {errors.exampleRequired && <span className=' text-red-600 italic'>Th</span>}
-          </label>
-          <label>
-            <span className='block'>Contrasena</span>
-            <input
-              className='border-b-2 border-black p-2 w-full focus:outline-none' type='password' name='password'
-            /><span className=' text-red-600 italic' />
-          </label>
-          <label>
-            <span className='block'>Telefono</span>
-            <input
-              className='border-b-2 border-black p-2 w-full focus:outline-none' type='tel' name='tel'
-            /><span className=' text-red-600 italic' />
-          </label>
-
-          <button type='submit' className=' bg-[#00BF63] rounded-md'>Crear</button>
-        </form>
+        </div>
       </main>
     </>
   )

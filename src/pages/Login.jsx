@@ -40,7 +40,7 @@ export default function Login () {
       <div className=' h-svh w-dvw justify-center items-center flex'>
         <div className='flex  p-3 smartphone:flex-col lg:flex-row md:flex-row gap-x-1 shadow-lg'>
           <div className='  w-[600px] bg-[#00BF63] rounded-lg items-center justify-center flex'>
-            <img className='scale-100' src='../public/EcoSystem.png' alt='ssd' />
+            <img className='scale-100' src='../public/imgs/EcoSystem.png' alt='ssd' />
           </div>
 
           <form className='  px-8 py-4 h-fit w-fit flex flex-col gap-y-6 items-center'>
