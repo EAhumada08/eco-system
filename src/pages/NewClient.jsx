@@ -37,7 +37,7 @@ export default function NewClient () {
             ? <Result />
             : <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col  gap-8 items-center'>
               <img src='./public/imgs/logo2.png' alt='' width='192' />
-              <h1 className=' text-3xl text-center font-bold text-[#00BF63]'>Crear nueva cuenta</h1>
+              <h1 className=' text-3xl text-center font-bold text-[#00BF63]'>Crear nueva </h1>
               <div className='w-72 flex flex-col gap-y-5'>
                 <TextField
                   label='Nombre completo'
