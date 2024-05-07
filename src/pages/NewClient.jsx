@@ -7,6 +7,8 @@ import { clientSchema } from '../validations/client'
 import { registerClient } from '../services/clients'
 import { useState } from 'react'
 
+import '../estilos/estilos.css'
+
 export default function NewClient () {
   const {
     register,
@@ -82,6 +84,9 @@ export default function NewClient () {
               >Ingresar
               </NavLink>
               </form>}
+              <div class="divfondocrearcuenta">
+
+              </div>
 
         </div>
       </main>
