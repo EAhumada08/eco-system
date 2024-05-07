@@ -5,16 +5,28 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import NewClient from './pages/NewClient'
+import App from './App'
+import AddWaste from './pages/AddWaste'
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />
+  },
   {
     path: '/login',
     element: <Login />
 
   },
   {
-    path: '/Dashboard',
-    element: <Dashboard />
+    path: '/dashboard',
+    element: <Dashboard />,
+    children: [
+      {
+        path: '/dashboard/addWaste',
+        element: <AddWaste />
+      }
+    ]
   },
   {
     path: '/nuevoCliente',
