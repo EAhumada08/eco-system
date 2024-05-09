@@ -34,19 +34,13 @@ export default function NewClient () {
 
   return (
     <>
-<<<<<<< HEAD
     <center>
       <main >
-        
         <div class="divfondocrearcuenta">
-=======
-      <main className='h-screen flex justify-center '>
-        <div className=' static shadow-lg   h-fit w-fit mt-10 p-10'>
->>>>>>> d8fa47e02427f8875790c38cb300cece45e463c2
           {userRegistered
-          ? <Result />
-          : <form onSubmit={handleSubmit(onSubmit)}>
-              <center>
+            ? <Result />
+            : <form onSubmit={handleSubmit(onSubmit)}>
+               <center>
               <div class="titulo">
                 <label for="crear">Crear cuenta</label>
               </div>
@@ -175,7 +169,8 @@ export default function NewClient () {
                   </center>
                 </div>
               </div> 
-            </form>}
+              </form>}
+
         </div>
       </main>
       </center>
