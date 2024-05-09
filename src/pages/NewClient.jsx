@@ -34,10 +34,15 @@ export default function NewClient () {
 
   return (
     <>
+<<<<<<< HEAD
     <center>
       <main >
         
         <div class="divfondocrearcuenta">
+=======
+      <main className='h-screen flex justify-center '>
+        <div className=' static shadow-lg   h-fit w-fit mt-10 p-10'>
+>>>>>>> d8fa47e02427f8875790c38cb300cece45e463c2
           {userRegistered
           ? <Result />
           : <form onSubmit={handleSubmit(onSubmit)}>
