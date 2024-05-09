@@ -31,7 +31,7 @@ export default function NewClient () {
 
   return (
     <>
-      <main className='h-lvh flex justify-center '>
+      <main className='h-screen flex justify-center '>
         <div className=' static shadow-lg   h-fit w-fit mt-10 p-10'>
           {userRegistered
             ? <Result />

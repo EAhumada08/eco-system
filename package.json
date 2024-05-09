@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.7",
     "@hookform/resolvers": "^3.3.4",
+    "antd": "5.17.0",
     "axios": "1.6.8",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
