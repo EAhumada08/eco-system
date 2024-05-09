@@ -1,38 +1,28 @@
-import { Button, Steps, theme, message } from 'antd'
+import { Button, Steps, theme, message, ConfigProvider } from 'antd'
 import { useState } from 'react'
-import BtnClasif from '../components/BtnClasifi'
+import Clasifi from '../components/Casifi'
+import TypeWaste from '../components/TypeWaste'
 
 export default function AddWaste () {
-  const { token } = theme.useToken()
   const [current, setCurrent] = useState(0)
-
-  const next = () => {
-    setCurrent(current + 1)
-  }
-
+  console.log(current)
   const prev = () => {
     setCurrent(current - 1)
   }
+  const { token } = theme.useToken()
+
   const steps = [
     {
-      title: 'First',
+      title: 'Seleccionar tipo de desecho',
       content: (
-        <div className='p-10 items-center flex flex-col justify-center gap-y-6'>
-          <h1 className='text-center'>Clasificacion desechos tecnologicos</h1>
-          <div className='flex flex-row'>
-            <BtnClasif onClick={() => next()} />
-          </div>
-          <div className='flex flex-row'>
-            <button>1</button>
-            <button>1</button>
 
-          </div>
-        </div>
+        <Clasifi current={current} setCurrent={setCurrent} />
+
       )
     },
     {
-      title: 'Second',
-      content: 'Second-Content'
+      title: 'Tipo',
+      content: <TypeWaste current={current} setCurrent={setCurrent} />
     },
     {
       title: 'Last',
@@ -53,18 +43,24 @@ export default function AddWaste () {
   }
   return (
     <div className=' w-full p-10'>
-      <Steps current={current} items={items} />
+      <ConfigProvider
+        theme={{
+
+          token: {
+            colorPrimary: '#00BF63'
+          }
+
+        }}
+      >
+        <Steps current={current} items={items} />
+      </ConfigProvider>
+
       <div
-        className=' h-fit'
+        className='  bg-green-200'
         style={contentStyle}
       > {steps[current].content}
       </div>
       <div style={{ marginTop: 24 }}>
-        {current < steps.length - 1 && (
-          <Button type='primary' onClick={() => next()}>
-            Next
-          </Button>
-        )}
         {current === steps.length - 1 && (
           <Button type='primary' onClick={() => message.success('Processing complete!')}>
             Done
@@ -72,10 +68,11 @@ export default function AddWaste () {
         )}
         {current > 0 && (
           <Button
+            onClick={() => prev()}
             style={{
               margin: '0 8px'
             }}
-            onClick={() => prev()}
+
           >
             Previous
           </Button>
