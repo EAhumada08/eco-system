@@ -1,11 +1,11 @@
-import BtnClasif from './BtnClasif'
 import { clasif } from '../const/Clasif'
+import BtnClasif from './BtnClasif'
 
-export default function Clasifi ({ current, setCurrent }) {
+export default function Clasif ({ current, setCurrent }) {
   return (
     <div className='p-10 items-center flex flex-col justify-center gap-y-6'>
-      <h1 className='text-center'>Clasificacion desechos tecnologicos</h1>
-      <div className='grid grid-cols-4 gap-4'>
+      <h1 className='text-center'>Clasificación desechos tecnologicos</h1>
+      <div className='grid lg:grid-cols-4 sm:grid-cols-2 gap-5'>
         {clasif.map((element, index) => {
           return (
             <BtnClasif

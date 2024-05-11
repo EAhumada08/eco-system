@@ -27,6 +27,7 @@
     align-items: center;
     justify-content: center;
     display: flex;
+    
 }
     .contenedordatosizq{
         width:80%;
@@ -36,6 +37,7 @@
         text-align: left;
         font-family: 'Codec Pro', sans-serif; 
         font-size: 140%;
+        
     }
 .contenedorder{
     width:50%;
@@ -45,6 +47,7 @@
     align-items: center;
     justify-content: center;
     display: flex;
+    
 }
     .contenedordatosder{
         width:80%;
@@ -77,6 +80,7 @@
     border: none;
     border-radius: 20px;
     background-color: #ededed;
+    
 }
 
 .botonguardar{

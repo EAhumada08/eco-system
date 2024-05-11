@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 const items = [
   {
-    key: 'profile',
+    key: 'client_profile',
     label: 'Mi perfil',
     icon: <UserOutlined />
   },

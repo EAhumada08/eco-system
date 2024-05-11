@@ -10,5 +10,10 @@ export const registerClient = async (client) => {
 
 export const validateAccount = async (client) => {
   const { data } = await axios.post(`${local}clients/login`, client)
-  return data 
+  return data
+}
+
+export const getClientById = async (id) => {
+  const { data } = await axios.get(`${local}clients/${id}`)
+  return data
 }

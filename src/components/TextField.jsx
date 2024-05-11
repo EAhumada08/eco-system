@@ -1,6 +1,6 @@
 export function TextField ({ label, type, register, name, pattern, error }) {
   return (
-    <label className='static flex-none'>
+    <label>
       <span className='block'>{label}</span>
       <input
         className={error

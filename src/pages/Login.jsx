@@ -18,6 +18,8 @@ export default function Login () {
     console.log(data)
     try {
       const res = await validateAccount(data)
+      console.log(res)
+      window.localStorage.setItem('idUser', JSON.stringify(res.client.id))
       navigate('/dashboard')
     } catch (error) {
       setError(true)
@@ -80,6 +82,7 @@ export default function Login () {
                 <TextField
                   label='Contraseña'
                   name='pass'
+                  type='password'
                   register={register}
                   error={error}
                 />

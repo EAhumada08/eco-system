@@ -1,10 +1,16 @@
 import { Button, Steps, theme, message, ConfigProvider } from 'antd'
-import { useState } from 'react'
-import Clasifi from '../components/Casifi'
+import { useEffect, useState } from 'react'
+import Clasif from '../components/Clasif'
 import TypeWaste from '../components/TypeWaste'
+import FormW from '../components/FormW'
 
 export default function AddWaste () {
+  useEffect(() => {
+    window.localStorage.removeItem('clasif')
+  }, [])
+
   const [current, setCurrent] = useState(0)
+
   console.log(current)
   const prev = () => {
     setCurrent(current - 1)
@@ -13,20 +19,22 @@ export default function AddWaste () {
 
   const steps = [
     {
-      title: 'Seleccionar tipo de desecho',
+      title: 'Seleccionar clasificacion de desecho',
       content: (
 
-        <Clasifi current={current} setCurrent={setCurrent} />
+        <Clasif current={current} setCurrent={setCurrent} />
 
       )
     },
     {
-      title: 'Tipo',
-      content: <TypeWaste current={current} setCurrent={setCurrent} />
+      title: 'Seleccionar tipo de desecho',
+      content: (
+        <TypeWaste current={current} setCurrent={setCurrent} />
+      )
     },
     {
-      title: 'Last',
-      content: 'Last-Content'
+      title: 'Ingresar datos',
+      content: <FormW />
     }
   ]
 
@@ -63,18 +71,16 @@ export default function AddWaste () {
       <div style={{ marginTop: 24 }}>
         {current === steps.length - 1 && (
           <Button type='primary' onClick={() => message.success('Processing complete!')}>
-            Done
+            Hecho
           </Button>
         )}
         {current > 0 && (
           <Button
+            className=''
             onClick={() => prev()}
-            style={{
-              margin: '0 8px'
-            }}
 
           >
-            Previous
+            Volver
           </Button>
         )}
 

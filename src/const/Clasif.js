@@ -28,5 +28,17 @@ export const clasif = [
     number: '5',
     firstP: 'Herramientas',
     secondP: 'Eléctricas'
+  },
+  {
+    name: 'JugEq',
+    number: '6',
+    firstP: 'Juguetes y equipos de',
+    secondP: 'tiempo libre'
+  },
+  {
+    name: 'InstVig',
+    number: '7',
+    firstP: 'Instrumentos de',
+    secondP: 'vigilancia y control'
   }
 ]

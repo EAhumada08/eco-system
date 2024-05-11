@@ -7,7 +7,7 @@ export default function Dashboard () {
       <Header />
       <main className='h-lvh bg-green-200 flex flex-row'>
         <Nav />
-        <section className='bg-white m-10 w-full'>
+        <section className=' bg-stone-200 m-10 w-full'>
           <Outlet />
           {/* <button>Nuevo desecho</button> */}
         </section>
