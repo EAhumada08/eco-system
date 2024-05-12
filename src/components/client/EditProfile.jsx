@@ -1,16 +1,29 @@
-import { MailOutlined } from '@ant-design/icons'
+import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 import { Button, ConfigProvider, Form, Input, Select } from 'antd'
 import { states } from '../../const/states'
+import { updateClient } from '../../services/clients'
+import { useNavigate } from 'react-router-dom'
+import FormItem from 'antd/es/form/FormItem'
 
 export default function EditProfile ({ client }) {
   const [form] = Form.useForm()
   const state = Form.useWatch('state', form)
 
+  const navigate = useNavigate()
+
   const result = states.find((name) => name.nombre === state)
   const ciudades = result?.ciudades
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log('Received values of form: ', values)
+    const id = window.localStorage.getItem('idUser')
+    try {
+      const res = await updateClient(id, values)
+      console.log(res)
+      navigate('/dashboard')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -77,7 +90,7 @@ export default function EditProfile ({ client }) {
                 />
               </Form.Item>
               <Form.Item
-                name='password'
+                name='pass'
                 label='Contraseña'
                 rules={[
                   {
@@ -90,6 +103,12 @@ export default function EditProfile ({ client }) {
                   type='password'
                 />
               </Form.Item>
+              <FormItem
+                name='tel'
+                label='Telefono'
+              >
+                <Input className='border-2 border-black' prefix={<PhoneOutlined />} />
+              </FormItem>
             </div>
             <h2 className=' font-bold text-lg mb-4'>Informacion de contacto</h2>
             <div className='grid grid-cols-6 gap-x-5'>

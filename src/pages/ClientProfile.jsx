@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { states } from '../const/states'
 import { getClientById } from '../services/clients'
 import EditProfile from '../components/client/EditProfile'
 
@@ -9,6 +8,7 @@ export default function ClientProfile () {
     firstname: '',
     lastname: '',
     email: '',
+    pass: '',
     tel: '',
     calle: '',
     extN: '',
@@ -34,14 +34,11 @@ export default function ClientProfile () {
     getClient()
   }, [])
 
-  const { firstname, lastname, email, tel, col, city, state, cp, extN, intN, calle } = client
+  const { firstname, lastname, email, pass, tel, col, city, state, cp, extN, intN, calle } = client
 
   const handleEdit = () => {
     setEdit(true)
   }
-
-  const result = states.find((name) => name.nombre === 'a')
-  const ciudades = result?.ciudades
 
   return (
     <>

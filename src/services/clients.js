@@ -17,3 +17,8 @@ export const getClientById = async (id) => {
   const { data } = await axios.get(`${local}clients/${id}`)
   return data
 }
+
+export const updateClient = async (id, values) => {
+  const { data } = await axios.patch(`${local}clients/${id}`, values)
+  return data
+}
