@@ -1,4 +1,4 @@
-export function TextField ({ label, type, register, name, pattern, error }) {
+export function TextField ({ label, type, register, name, pattern, error, defaultValue }) {
   return (
     <label>
       <span className='block'>{label}</span>
@@ -9,6 +9,7 @@ export function TextField ({ label, type, register, name, pattern, error }) {
         type={type}
         {...register(name)}
         required
+        defaultValue={defaultValue}
         pattern={pattern}
       />
     </label>
