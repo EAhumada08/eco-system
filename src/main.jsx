@@ -1,4 +1,3 @@
-import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import '../src/index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -8,6 +7,7 @@ import NewClient from './pages/NewClient'
 import App from './App'
 import AddWaste from './pages/AddWaste'
 import ClientProfile from './pages/ClientProfile'
+import Waste from './pages/clients/Waste'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/client_profile',
         element: <ClientProfile />
+      },
+      {
+        path: '/dashboard/waste',
+        element: <Waste />
       }
     ]
   },
