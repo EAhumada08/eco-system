@@ -22,3 +22,8 @@ export const updateClient = async (id, values) => {
   const { data } = await axios.patch(`${local}clients/${id}`, values)
   return data
 }
+
+export const getDesechosById = async (id) => {
+  const { data } = await axios.get(`${local}clients/desechos/${id}`)
+  return data
+}
