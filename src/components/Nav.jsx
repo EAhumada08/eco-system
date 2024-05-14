@@ -1,5 +1,5 @@
-import { UserOutlined } from '@ant-design/icons'
-import { Menu } from 'antd'
+import { FieldTimeOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons'
+import { ConfigProvider, Menu } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 const items = [
@@ -11,7 +11,12 @@ const items = [
   {
     key: 'addWaste',
     label: 'Agregar desecho tecnologico',
-    icon: <UserOutlined />
+    icon: <PlusOutlined />
+  },
+  {
+    key: 'waste',
+    label: 'Ver recientes',
+    icon: <FieldTimeOutlined />
   }
 ]
 
@@ -26,11 +31,20 @@ export default function Nav () {
     <nav
       className='h-full w-40 p-4 bg-green-300'
     >
-      <Menu
-        style={{ marginTop: 24 }}
-        onClick={onClick}
-        items={items}
-      />
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: '#00BF63'
+          }
+        }}
+      >
+        <Menu
+          style={{ marginTop: 24 }}
+          onClick={onClick}
+          items={items}
+        />
+      </ConfigProvider>
+
     </nav>
   )
 }
