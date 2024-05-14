@@ -8,6 +8,7 @@ import App from './App'
 import AddWaste from './pages/AddWaste'
 import ClientProfile from './pages/ClientProfile'
 import Waste from './pages/clients/Waste'
+import PanelRecolector from './pages/Recolectores/PanelRecolector'
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: '/nuevoCliente',
     element: <NewClient />
+  },
+  {
+    path: '/panel',
+    element: <PanelRecolector />
   }
 ])
 

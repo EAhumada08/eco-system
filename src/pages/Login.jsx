@@ -11,7 +11,8 @@ export default function Login () {
   } = useForm()
 
   const navigate = useNavigate()
-  const [user, setUser] = useState('clients')
+
+  const [user, setUser] = useState('cliente')
   const [error, setError] = useState(false)
 
   const onSubmit = async (data) => {
@@ -20,7 +21,13 @@ export default function Login () {
       const res = await validateAccount(data)
       console.log(res)
       window.localStorage.setItem('idUser', JSON.stringify(res.client.id))
-      navigate('/dashboard')
+      if (user !== res.client.rol) {
+        console.log(user, res.client.rol)
+        setError(true)
+      } else {
+        if (user === 'cliente') navigate('/dashboard')
+        if (user === 'recolector') navigate('/panel')
+      }
     } catch (error) {
       setError(true)
       console.log(error)
@@ -28,12 +35,10 @@ export default function Login () {
   }
 
   const handleClick = (e) => {
-    e.preventDefault()
     const { name } = e.target
-    setUser({ name })
-    console.log(name)
+    setUser(name)
   }
-
+  console.log(user)
   return (
 
     <>
@@ -49,19 +54,19 @@ export default function Login () {
             <div className=' gap-x-3 flex flex-row justify-center items-center'>
               <button
                 className='bg-[#00BF63] text-white hover:bg-[#9a9999]  rounded-tr-[20px] rounded-bl-[20px] font-bold p-2'
-                name='clients' onClick={handleClick}
+                name='cliente' onClick={handleClick}
               >Cliente
               </button>
 
               <button
                 className='bg-[#00BF63] text-white hover:bg-[#9a9999]  rounded-tr-[20px] rounded-bl-[20px] font-bold p-2'
-                name='recolectors' onClick={handleClick}
+                name='recolector' onClick={handleClick}
               >Recolector
               </button>
 
               <button
                 className='bg-[#00BF63] text-white hover:bg-[#9a9999]  rounded-tr-[20px] rounded-bl-[20px] font-bold p-2'
-                name='admins' onClick={handleClick}
+                name='admin' onClick={handleClick}
               >Administrador
               </button>
             </div>
