@@ -1,15 +1,23 @@
 import { Controller, useForm } from 'react-hook-form'
 import { TextField } from './TextField'
 import { Radio, message } from 'antd'
+import { registrarDesecho } from '../services/desechos'
 
 export default function FormW ({ current, setCurrent }) {
   const { register, handleSubmit, control } = useForm()
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     message.success('Proceso completado')
     setCurrent(0)
     const idClient = window.localStorage.getItem('idUser')
     console.log({ idClient, data })
+
+    try {
+      const res = await registrarDesecho(idClient, data)
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className=' p-6 flex flex-row gap-x-16 justify-center'>
@@ -49,11 +57,11 @@ export default function FormW ({ current, setCurrent }) {
         </select>
       </div>
       <div className=' flex flex-col gap-y-10'>
-        <TextField
+        <input
           label='Peso'
-          name='peso'
           type='number'
-          register={register}
+          {...register('peso')}
+          step='0.001'
           className='textfield '
         />
 
