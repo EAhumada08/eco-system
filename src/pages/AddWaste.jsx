@@ -1,21 +1,20 @@
-import { Button, Steps, theme, message, ConfigProvider } from 'antd'
+import { Button, Steps, theme, ConfigProvider } from 'antd'
 import { useEffect, useState } from 'react'
 import Clasif from '../components/Clasif'
 import TypeWaste from '../components/TypeWaste'
 import FormW from '../components/FormW'
 
 export default function AddWaste () {
+  const { token } = theme.useToken()
+  const [current, setCurrent] = useState(0)
+
   useEffect(() => {
     window.localStorage.removeItem('clasif')
   }, [])
 
-  const [current, setCurrent] = useState(0)
-
-  console.log(current)
   const prev = () => {
     setCurrent(current - 1)
   }
-  const { token } = theme.useToken()
 
   const steps = [
     {
@@ -34,7 +33,7 @@ export default function AddWaste () {
     },
     {
       title: 'Ingresar datos',
-      content: <FormW />
+      content: <FormW current={current} setCurrent={setCurrent} />
     }
   ]
 
@@ -49,6 +48,7 @@ export default function AddWaste () {
     border: `1px dashed ${token.colorBorder}`,
     marginTop: 16
   }
+
   return (
     <div className=' w-full p-10'>
       <ConfigProvider
@@ -69,11 +69,7 @@ export default function AddWaste () {
       > {steps[current].content}
       </div>
       <div style={{ marginTop: 24 }}>
-        {current === steps.length - 1 && (
-          <Button type='primary' onClick={() => message.success('Processing complete!')}>
-            Hecho
-          </Button>
-        )}
+
         {current > 0 && (
           <Button
             className=''
