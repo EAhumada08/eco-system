@@ -1,9 +1,9 @@
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { TextField } from './TextField'
-import { message } from 'antd'
+import { Radio, message } from 'antd'
 
 export default function FormW ({ current, setCurrent }) {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, control } = useForm()
 
   const onSubmit = (data) => {
     message.success('Proceso completado')
@@ -48,14 +48,28 @@ export default function FormW ({ current, setCurrent }) {
           <option value='Verde'>Verde</option>
         </select>
       </div>
-      <div className=' flex flex-row gap-x-16'>
+      <div className=' flex flex-col gap-y-10'>
         <TextField
           label='Peso'
           name='peso'
-          type='text'
+          type='number'
           register={register}
           className='textfield '
         />
+
+        <Radio.Group>
+
+          <Controller
+            name='estado'
+            control={control}
+            render={({ field }) => <Radio {...field} value='sirve'>Sirve</Radio>}
+          />
+          <Controller
+            name='estado'
+            control={control}
+            render={({ field }) => <Radio {...field} value='no sirve'>No sirve</Radio>}
+          />
+        </Radio.Group>
         <TextField
           label='Fecha de adquisicion'
           name='date'
