@@ -101,7 +101,8 @@ export default function Login () {
               >Entrar
               </button>
 
-              <NavLink to='/nuevoCliente' className='hover:text-green-600 font-bold'>No tienes cuenta? Registrate</NavLink>
+              {user === 'cliente' && <NavLink to='/nuevoCliente' className='hover:text-green-600 font-bold'>No tienes cuenta? Registrate</NavLink>}
+              {user === 'recolector' && <NavLink to='/nuevo_recolector' className='hover:text-green-600 font-bold'>No estas registrado como recolector? Registrate</NavLink>}
 
             </form>
           </div>
