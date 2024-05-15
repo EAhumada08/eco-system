@@ -1,0 +1,144 @@
+/*Panel*/
+.divprogramar{
+    width: 33%;
+    height: 50%;
+    background-color: rgb(255, 255, 255);
+    float: left;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+}
+.imgpanel{
+    width: 100%;
+}
+
+/*MI PERFIL RECOLECTOR*/
+.contenedormiperfilrecolector{
+    width: 100%;
+    height: 95%;
+    background-color: #ffffff;
+}
+.titulorecolector{
+    width: 60%;
+    height: 8%;
+    background-color: #00BF63;
+    border-radius: 10px;
+    font-family: 'Codec Pro', sans-serif; 
+    font-size: 190%;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.contenedorizqmiperfilrecolector{
+    width:50%;
+    height: 92%;
+    background-color: #ffffff;
+    float: left;
+    align-items: center;
+}
+.contenedordermiperfilrecolector{
+    width:50%;
+    height: 88%;
+    background-color: #ffffff;
+    float: right;
+    align-items: center;
+}
+
+.inputresponsable{
+    width: 120%;
+    height: 65%;
+    padding: 10px;
+    font-family: 'Codec Pro', sans-serif; 
+    font-size: 90%;
+    border: none;
+    border-radius: 20px;
+    background-color: #ededed;
+}
+
+.inputcodigopostal{
+    width: 50%;
+    height: 8%;
+    padding: 10px;
+    font-family: 'Codec Pro', sans-serif; 
+    font-size: 90%;
+    border: none;
+    border-radius: 20px;
+    background-color: #ededed;
+}
+
+.inputcrearmiperfilrecolector{
+    width: 100%;
+    height: 8%;
+    padding: 10px;
+    font-family: 'Codec Pro', sans-serif; 
+    font-size: 90%;
+    border: none;
+    border-radius: 20px;
+    background-color: #ededed;
+}
+.inputdatosdermiperfilrecolector{
+    width: 90%;
+    height: 65%;
+    padding: 10px;
+    font-family: 'Codec Pro', sans-serif; 
+    font-size: 90%;
+    border: none;
+    border-radius: 20px;
+    background-color: #ededed;
+}
+
+.botoneseditarguardar{
+    width: 100%;
+    height: 8%;
+    background-color: #ffffff;
+    
+    font-family: 'Codec Pro', sans-serif; 
+    font-size: 150%;
+}
+    .btneditarrecolector{
+        width: 45%;
+        height: 100%;
+        background-color: #F3F3F3;
+        font-family: 'Codec Pro', sans-serif; 
+        font-size: 90%;
+        font-weight: bold;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        float: left;
+    }
+    .botonguardarmiperfilrecolector{
+        width: 45%;
+        height: 100%;
+        padding: 10px 20px;
+        background-color: #00BF63;
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 90%;
+        font-weight: bold;
+        font-family: 'Codec Pro', sans-serif; 
+        float: right;
+
+    }
+
+/*MENU CONTENEDOR PARA RECOLECTOR*/
+.side-paneL2 {
+    display: none;
+    width: 70%;
+    height: 3200%;
+    background-color: white;
+    Color: black;
+    float: right;
+    border: 1px solid #008E5A;
+    border-radius: 5px;
+    top: 0;
+    left: 0;
+    padding-top: 10px;
+    font-family: 'Codec Pro', sans-serif; 
+    font-size: 100%;
+  }
