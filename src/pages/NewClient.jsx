@@ -78,36 +78,6 @@ export default function NewClient () {
                     {error && <p>Error</p>}
                     {/* errors.email ? <span className='visible text-red-600 italic w-full'>{errors.email?.message}</span> : <span className='invisible text-red-600 italic w-full' /> */}
 
-                    <ConfigProvider
-                      theme={{
-                        components: {
-                          Radio: {
-                            colorPrimary: '#00BF63',
-                            algorithm: 'true',
-                            fontSize: 23,
-                            fontFamily: 'Codec Pro,sans-serif'
-                          }
-                        }
-                      }}
-                    >
-                      <div>
-                        <h1>Genero</h1>
-                        <Radio.Group>
-                          <Controller
-                            name='sexo'
-                            control={control}
-                            render={({ field }) => <Radio {...field} value='Hombre'>Masculino</Radio>}
-                          />
-                          <Controller
-                            name='sexo'
-                            control={control}
-                            render={({ field }) => <Radio {...field} value='Mujer'>Femenino</Radio>}
-                          />
-                        </Radio.Group>
-                      </div>
-
-                    </ConfigProvider>
-
                     {errors.estado ? <span>{errors.estado?.message}</span> : <span />}
 
                     <div className='mt-6 mb-6'>
