@@ -1,217 +1,206 @@
-import '../estilos/login.css'
-import { TextField } from '../components/TextField'
+import '../estilos/recolector.css'
 import Result from '../components/Result'
 import { NavLink } from 'react-router-dom'
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { clientSchema } from '../validations/client'
 import { registerClient } from '../services/clients'
 import { useState } from 'react'
-import { Select } from 'antd'
+import { Form, Select, Input, Button, ConfigProvider } from 'antd'
 import { states } from '../const/states'
 
 export default function NewClient () {
-  const {
-    register,
-    handleSubmit,
-    control,
-    watch,
-    formState: { errors }
-  } = useForm({
-    resolver: zodResolver(clientSchema), defaultValues: { state: 'Aguascalientes' }
-
-  }
-  )
-
-  const [userRegistered, setUserRegistered] = useState(false)
-  const [error, setError] = useState(false)
-  // const navigate = useNavigate()
-
-  const state = watch('state')
+  const [form] = Form.useForm()
+  const state = Form.useWatch('state', form)
 
   const result = states.find((name) => name.nombre === state)
-  const { ciudades } = result
+  const ciudades = result?.ciudades
 
-  const onSubmit = async (data) => {
-    console.log(data)
+  const [userRegistered, setUserRegistered] = useState(false)
+
+  const onFinish = async (values) => {
+    console.log('Received values of form: ', values)
     try {
-      const res = await registerClient(data)
+      const res = await registerClient(values)
       console.log(res)
       setUserRegistered(true)
     } catch (error) {
       console.log(error)
-      setError(true)
     }
   }
 
   return (
     <>
-      <center>
-        <main>
-          <div className='divfondocrearcuenta'>
-            {userRegistered
-              ? <Result />
-              : <form onSubmit={handleSubmit(onSubmit)}>
-                <center>
-                  <div className='titulo'>
-                    <label htmlFor='crear'>Crear cuenta</label>
-                  </div>
-                </center><br /><br />
-                <div className='contenedorizq'>
-                  <div className='contenedordatosizq'>
-                    <TextField
-                      label='Nombre'
-                      name='name'
-                      type='text'
-                      register={register}
-                      className='textfield'
-                    />
-                    {errors.name && <span>{errors.name?.message}</span>}
-                    <TextField
-                      label='Correo'
-                      name='email'
-                      type='email'
-                      register={register}
-                    />
-                    {error && <p>Error</p>}
-                    {/* errors.email ? <span className='visible text-red-600 italic w-full'>{errors.email?.message}</span> : <span className='invisible text-red-600 italic w-full' /> */}
-
-                    {errors.estado ? <span>{errors.estado?.message}</span> : <span />}
-
-                    <div className='mt-6 mb-6'>
-                      <h1>Estado</h1>
-                      <Controller
-                        name='state'
-                        control={control}
-                        render={({ field }) =>
-                          <Select
-                            defaultValue='Aguascalientes'
-                            className='w-40'
-                            {...field}
-                            options={states.map((state) => {
-                              return (
-                                {
-                                  value: state.nombre,
-                                  label: state.nombre
-                                }
-                              )
-                            })}
-                          />}
-                      />
-                    </div>
-
-                    {errors.estado ? <span>{errors.estado?.message}</span> : <span />}
-                    <TextField
-                      label='Código postal'
-                      name='cp'
-                      type='text'
-                      register={register}
-                    />
-                    {errors.cp ? <span>{errors.cp?.message}</span> : <span />}
-                    <div className='divdatosder2'>
-                      <div>
-                        <TextField
-                          label='Número interior'
-                          name='numi'
-                          type='int'
-                          register={register}
-                        />
-                        {errors.numi ? <span>{errors.numi?.message}</span> : <span />}
-                      </div>
-                      <div>
-                        <TextField
-                          label='Número exterior'
-                          name='numex'
-                          type='int'
-                          register={register}
-                        />
-                        {errors.numex ? <span>{errors.numex?.message}</span> : <span />}
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-                <div className='contenedorder'>
-                  <div className='contenedordatosder'>
-                    <TextField
-                      label='Apellido'
-                      name='lastname'
-                      type='text'
-                      register={register}
-                    />
-                    {errors.name && <span>{errors.name?.message}</span>}
-                    <TextField
-                      className='textfield'
-                      label='Contraseña'
-                      name='password'
-                      type='password'
-                      register={register}
-                    />
-                    {errors.password ? <span>{errors.password?.message}</span> : <span />}
-                    <TextField
-                      label='Telefono'
-                      name='tel'
-                      type='tel'
-                      pattern='[0-9]{10}'
-                      register={register}
-                    />
-                    {errors.tel ? <span>{errors.tel?.message}</span> : <span />}
-
-                    <div className='mt-6 mb-6'>
-                      <h1>Ciudad</h1>
-                      <Controller
-                        control={control}
-                        name='municipio'
-                        render={({ field }) =>
-                          <Select
-                            {...field}
-                            className='w-40'
-                            options={ciudades.map((ciudad) => {
-                              return ({
-                                value: ciudad,
-                                label: ciudad
-                              })
-                            })}
-                          />}
-                      />
-
-                    </div>
-
-                    {errors.mn ? <span>{errors.mn?.message}</span> : <span />}
-                    <TextField
-                      label='Colonia'
-                      name='col'
-                      type='text'
-                      register={register}
-                      className='textfield'
-                    />
-                    {errors.col ? <span>{errors.col?.message}</span> : <span />}
-                    <TextField
-                      label='Calle'
-                      name='street'
-                      type='text'
-                      register={register}
-                    />
-                    {errors.calle ? <span>{errors.calle?.message}</span> : <span />}<br /><br />
-                    <center>
-                      <button
-                        type='submit'
-                        className='botonguardar'
-                      >Crear
-                      </button>
-                      <NavLink
-                        className='botonguardar'
-                        to='/login'
-                      >Ingresar
-                      </NavLink>
-                    </center>
-                  </div>
-                </div>
-              </form>}
-
+      {
+      userRegistered
+        ? <Result />
+        : <div className=' border-2 border-black p-3 flex items-center h-dvh flex-col'>
+          <div className='titulorecolector'>
+            <label htmlFor='crear'>Crear cuenta</label>
           </div>
-        </main>
-      </center>
+          <ConfigProvider
+            theme={{
+              token: {
+                fontSize: 20,
+                colorPrimary: '#00BF63',
+                fontFamily: 'Codec Pro,sans-serif'
+              }
+            }}
+          >
+            <Form
+              initialValues={{ state: 'Aguascalientes', city: 'Aguascalientes' }}
+              form={form}
+              onFinish={onFinish}
+              layout='vertical'
+              className=' mt-10'
+            >
+              <div className='grid grid-cols-2 gap-x-20'>
+                <div>
+                  <div className='flex flex-row gap-x-6'>
+                    <Form.Item
+                      name='firstname'
+                      label='Nombre'
+                    >
+                      <Input variant='filled' />
+                    </Form.Item>
+                    <Form.Item
+                      name='lastname'
+                      label='Apellido'
+                    >
+                      <Input variant='filled' />
+                    </Form.Item>
+                  </div>
+                  <Form.Item
+                    name='email'
+                    label='Correo'
+                  >
+                    <Input variant='filled' />
+                  </Form.Item>
+                  <div className='flex  flex-row gap-x-6'>
+                    <Form.Item
+                      name='pass'
+                      label='Contraseña'
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Porfavor ingresa una contraseña'
+                        }
+                      ]}
+                      hasFeedback
+                    >
+                      <Input.Password variant='filled' />
+                    </Form.Item>
+                    <Form.Item
+                      name='confirm'
+                      label='Confirmar contraseña'
+                      dependencies={['pass']}
+                      hasFeedback
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Confirma la contraseña'
+                        },
+                        ({ getFieldValue }) => ({
+                          validator (_, value) {
+                            if (!value || getFieldValue('pass') === value) {
+                              return Promise.resolve()
+                            }
+                            return Promise.reject(new Error('La contraseña no coincide'))
+                          }
+                        })
+                      ]}
+                    >
+                      <Input.Password variant='filled' />
+                    </Form.Item>
+                  </div>
+
+                  <Form.Item
+                    name='tel'
+                    label='Telefono'
+                  >
+                    <Input variant='filled' />
+                  </Form.Item>
+
+                </div>
+
+                <div className=''>
+
+                  <Form.Item
+                    name='calle'
+                    label='Calle'
+                  >
+                    <Input variant='filled' />
+                  </Form.Item>
+                  <div className='flex flex-row gap-x-6'>
+                    <Form.Item
+                      name='extN'
+                      label='Numero exterior'
+                    >
+                      <Input variant='filled' />
+                    </Form.Item>
+                    <Form.Item
+                      name='intN'
+                      label='Numero interior'
+                    >
+                      <Input variant='filled' />
+                    </Form.Item>
+                  </div>
+
+                  <div className='flex flex-row gap-x-6'>
+                    <Form.Item
+                      name='col'
+                      label='Colonia'
+                    >
+                      <Input variant='filled' />
+                    </Form.Item>
+                    <Form.Item
+                      name='cp'
+                      label='Codigo postal'
+                    >
+                      <Input variant='filled' />
+                    </Form.Item>
+                  </div>
+
+                  <div className='flex flex-row gap-x-6'>
+                    <Form.Item
+                      name='state'
+                      label='Estado'
+                    >
+                      <Select
+                        options={states.map((state) => {
+                          return (
+                            {
+                              value: state.nombre,
+                              label: state.nombre
+                            }
+                          )
+                        })}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      name='city'
+                      label='Ciudad'
+                    >
+                      <Select options={ciudades?.map((ciudad) => {
+                        return (
+                          {
+                            value: ciudad,
+                            label: ciudad
+                          }
+                        )
+                      })}
+                      />
+                    </Form.Item>
+                  </div>
+
+                </div>
+              </div>
+              <div className='flex gap-x-6'>
+                <Button htmlType='submit'>Registrar</Button>
+                <NavLink to='/login'>Ingresar</NavLink>
+              </div>
+
+            </Form>
+          </ConfigProvider>
+          </div>
+    }
     </>
   )
 }

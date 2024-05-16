@@ -20,6 +20,7 @@ export default function NuevoRecolector () {
       console.log(error)
     }
   }
+
   return (
     <div className=' border-2 border-black p-3 flex items-center h-dvh flex-col'>
       <div className='titulorecolector'>
