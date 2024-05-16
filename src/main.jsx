@@ -10,6 +10,7 @@ import ClientProfile from './pages/ClientProfile'
 import Waste from './pages/clients/Waste'
 import PanelRecolector from './pages/Recolectores/PanelRecolector'
 import NuevoRecolector from './pages/Recolectores/NuevoRecolector'
+import ProgramarEnvio from './pages/Recolectores/ProgramarEnvio'
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: '/panel',
     element: <PanelRecolector />
+  },
+  {
+    path: '/progamar_envio',
+    element: <ProgramarEnvio />
   }
 ])
 

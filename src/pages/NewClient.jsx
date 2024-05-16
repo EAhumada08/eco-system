@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { clientSchema } from '../validations/client'
 import { registerClient } from '../services/clients'
 import { useState } from 'react'
-import { ConfigProvider, Radio, Select } from 'antd'
+import { Select } from 'antd'
 import { states } from '../const/states'
 
 export default function NewClient () {
@@ -28,11 +28,9 @@ export default function NewClient () {
   // const navigate = useNavigate()
 
   const state = watch('state')
-  console.log(state)
 
   const result = states.find((name) => name.nombre === state)
   const { ciudades } = result
-  console.log(ciudades)
 
   const onSubmit = async (data) => {
     console.log(data)

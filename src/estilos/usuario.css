@@ -375,15 +375,15 @@
         }
         th{
             border: 3px solid #000000; 
-            padding: 3%; 
+            padding: 1%; 
             text-align: left; 
             background-color:#D9D9D9;
             text-align: center;
         }
         td {
+            text-align: center;
             border: 3px solid #000000; 
-            padding: 3%; 
-            text-align: left; 
+            padding: 1%; 
             background-color: #ffffff;
             font-family: 'Codec Pro', sans-serif; 
             font-size: 100%;
