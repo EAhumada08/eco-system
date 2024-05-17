@@ -11,6 +11,7 @@ import Waste from './pages/clients/Waste'
 import PanelRecolector from './pages/Recolectores/PanelRecolector'
 import NuevoRecolector from './pages/Recolectores/NuevoRecolector'
 import ProgramarEnvio from './pages/Recolectores/ProgramarEnvio'
+import RecoverPassword from './pages/RecoverPassword/RecoverPassword'
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
     path: '/login',
     element: <Login />
 
+  },
+  {
+    path: '/recoverpassword',
+    element: <RecoverPassword />
   },
   {
     path: '/dashboard',

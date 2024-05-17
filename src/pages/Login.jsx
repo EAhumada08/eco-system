@@ -91,6 +91,11 @@ export default function Login () {
                   register={register}
                   error={error}
                 />
+                <NavLink
+                  to='/recoverpassword'
+                  className=' text-right'
+                >Olvidaste tu contraseña?
+                </NavLink>
               </div>
 
               <h1 className={error ? 'visible text-red-600' : 'invisible'}>Datos incorrecctos</h1>

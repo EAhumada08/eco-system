@@ -1,6 +1,7 @@
 import '../../estilos/usuario.css'
 import '../../estilos/recolector.css'
 import { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import { getAllDesechos } from '../../services/desechos'
 import { Checkbox } from 'antd'
 
@@ -42,10 +43,10 @@ export default function ProgramarEnvio () {
 
       <div className='divmenu'>
         <div id='side-panel' className='contenido'>
-          <a href=''>Mi perfil</a><br />
-          <a href=''>Mi perfil</a><br />
-          <a href=''>Mi perfil</a><br />
-          <a href=''>Mi perfil</a>
+          <NavLink to='/'><a>Panel</a><br /></NavLink>
+          <NavLink to='/panel'><a>Panel</a><br /></NavLink>
+          <NavLink to='/'><a>Panel</a><br /></NavLink>
+          <NavLink to='/login'><a>Cerrar sesion</a><br /></NavLink>
         </div>
         <div id='side-panel-trigger' className='side-panel-trigger'>
           <a
