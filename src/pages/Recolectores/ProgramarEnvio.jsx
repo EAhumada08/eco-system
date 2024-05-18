@@ -8,6 +8,7 @@ import { Checkbox } from 'antd'
 export default function ProgramarEnvio () {
   const [desechos, setDesechos] = useState([])
   const [cont, setCont] = useState(0)
+  const [recolectar, setRecolectar] = useState([])
 
   const getDesechos = async () => {
     try {
@@ -21,13 +22,14 @@ export default function ProgramarEnvio () {
   const onChange = (e) => {
     const data = e.target.value
     if (e.target.checked === false) setCont(cont - data.peso)
+
     if (e.target.checked === true) {
+      recolectar.push(data)
       setCont(cont + data.peso)
-      console.log(e.target.name, data.peso, e.target.checked)
     }
   }
-  console.log(cont)
-  console.log(desechos)
+
+  console.log(recolectar)
 
   useEffect(() => {
     getDesechos()
@@ -103,6 +105,7 @@ export default function ProgramarEnvio () {
                             name={desecho.desecho_id}
                             value={desecho}
                             onChange={onChange}
+                            disabled={cont >= 50 && true}
                               />
                           </td>
 
@@ -116,7 +119,11 @@ export default function ProgramarEnvio () {
               </tbody>
             </table>
 
-            <h1>Peso: {cont}</h1>
+            <h1
+              className='mt-10 font-bold text-lg'
+            >Peso: {cont}
+            </h1>
+            <NavLink to='/map'>Ruta</NavLink>
           </div>
         </div>
       </div>

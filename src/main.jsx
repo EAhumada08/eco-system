@@ -12,6 +12,7 @@ import PanelRecolector from './pages/Recolectores/PanelRecolector'
 import NuevoRecolector from './pages/Recolectores/NuevoRecolector'
 import ProgramarEnvio from './pages/Recolectores/ProgramarEnvio'
 import RecoverPassword from './pages/RecoverPassword/RecoverPassword'
+import MapGoogle from './pages/Recolectores/Map'
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
   {
     path: '/progamar_envio',
     element: <ProgramarEnvio />
+  },
+  {
+    path: '/map',
+    element: <MapGoogle />
   }
 ])
 
